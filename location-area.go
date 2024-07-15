@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type LocationAreaObj struct {
 	Count   int    `json:"count"`
 	Next    string `json:"next"`
@@ -17,4 +19,10 @@ var cur_location_obj = LocationAreaObj{
 		Name string `json:"name"`
 		Url  string `json:"url"`
 	}{},
+}
+
+func (l *LocationAreaObj) PrintLocations() {
+	for _, locs := range l.Results {
+		fmt.Println(locs.Name)
+	}
 }
