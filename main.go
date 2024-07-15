@@ -1,5 +1,10 @@
 package main
 
+import (
+	"github.com/hemanth-ks97/pokedex-go/internal/pokeapi"
+)
+
 func main() {
-	startRepl()
+	client := pokeapi.NewPokeClient()
+	startRepl(&client)
 }
