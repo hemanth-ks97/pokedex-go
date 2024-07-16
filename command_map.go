@@ -37,5 +37,10 @@ func GetCommands() map[string]Command {
 			description: "Lists the stats of the caught pokemon from your Pokedex",
 			callback:    inspect_cb,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Lists the names of all caught pokemon",
+			callback:    pokedex_cb,
+		},
 	}
 }
