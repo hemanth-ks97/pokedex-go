@@ -1,4 +1,4 @@
-package main
+package pokeapi
 
 import "fmt"
 
@@ -12,7 +12,7 @@ type LocationAreaObj struct {
 	} `json:"results"`
 }
 
-var cur_location_obj = LocationAreaObj{
+var Cur_location_obj = LocationAreaObj{
 	Next: "https://pokeapi.co/api/v2/location-area",
 	Prev: "",
 	Results: []struct {
@@ -22,7 +22,8 @@ var cur_location_obj = LocationAreaObj{
 }
 
 func (l *LocationAreaObj) PrintLocations() {
+	fmt.Println("Current Locations: ")
 	for _, locs := range l.Results {
-		fmt.Println(locs.Name)
+		fmt.Printf(" - %s\n", locs.Name)
 	}
 }

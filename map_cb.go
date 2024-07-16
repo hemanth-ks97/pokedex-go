@@ -14,21 +14,21 @@ func map_cb(pokeclient *pokeapi.PokeClient) error {
 		return errors.New("you have reached the last page")
 	}
 	//check cache and return if hit
-	cached_bytes, is_present := pokeclient.Cache.Get(cur_location_obj.Next)
+	cached_bytes, is_present := pokeclient.Cache.Get(pokeapi.Cur_location_obj.Next)
 	if is_present {
-		cur_location_obj.Next = ""
-		cur_location_obj.Prev = ""
-		err := json.Unmarshal(cached_bytes, &cur_location_obj)
+		pokeapi.Cur_location_obj.Next = ""
+		pokeapi.Cur_location_obj.Prev = ""
+		err := json.Unmarshal(cached_bytes, &pokeapi.Cur_location_obj)
 		if err != nil {
 			return err
 		}
 		fmt.Println("Cache Hit!")
-		cur_location_obj.PrintLocations()
+		pokeapi.Cur_location_obj.PrintLocations()
 		return nil
 	}
 
 	//cache miss
-	res, err := pokeclient.HTTPClient.Get(cur_location_obj.Next)
+	res, err := pokeclient.HTTPClient.Get(pokeapi.Cur_location_obj.Next)
 	if err != nil {
 		return err
 	}
@@ -42,19 +42,15 @@ func map_cb(pokeclient *pokeapi.PokeClient) error {
 	}
 
 	//add to cache
-	pokeclient.Cache.Add(cur_location_obj.Next, body)
-	cur_location_obj.Next = ""
-	cur_location_obj.Prev = ""
-	err = json.Unmarshal(body, &cur_location_obj)
+	pokeclient.Cache.Add(pokeapi.Cur_location_obj.Next, body)
+	pokeapi.Cur_location_obj.Next = ""
+	pokeapi.Cur_location_obj.Prev = ""
+	err = json.Unmarshal(body, &pokeapi.Cur_location_obj)
 	if err != nil {
 		return err
 	}
 
-	// for _, locs := range cur_location_obj.Results {
-	// 	fmt.Println(locs.Name)
-	// }
-
-	cur_location_obj.PrintLocations()
+	pokeapi.Cur_location_obj.PrintLocations()
 
 	return nil
 }
