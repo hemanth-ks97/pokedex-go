@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/hemanth-ks97/pokedex-go/internal/pokeapi"
 )
@@ -15,11 +16,12 @@ func startRepl(client *pokeapi.PokeClient) {
 		fmt.Print("pokedex > ")
 		scanner.Scan()
 		input := scanner.Text()
-
-		command, exists := GetCommands()[input]
+		// split input into cmd, args []string
+		cmd_list := strings.Split(input, " ")
+		command, exists := GetCommands()[cmd_list[0]]
 		if exists {
-			err := command.callback(client)
-
+			args := cmd_list[1:]
+			err := command.callback(client, args)
 			if err != nil {
 				fmt.Println(err)
 			}

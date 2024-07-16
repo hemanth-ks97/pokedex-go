@@ -1,12 +1,16 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/hemanth-ks97/pokedex-go/internal/pokeapi"
 )
 
-func help_cb(pokeclient *pokeapi.PokeClient) error {
+func help_cb(pokeclient *pokeapi.PokeClient, args []string) error {
+	if len(args) != 0 {
+		return errors.New("invalid usage - received more arguments than expected")
+	}
 	fmt.Println()
 	fmt.Println("Welcome to the Pokedex!")
 	fmt.Println("Usage:")

@@ -9,6 +9,10 @@ import (
 	"github.com/hemanth-ks97/pokedex-go/internal/pokeapi"
 )
 
+func mapb_cb(pokeclient *pokeapi.PokeClient, args []string) error {
+	if len(args) != 0 {
+		return errors.New("invalid usage - received more arguments than expected")
+	}
 	if pokeapi.Cur_location_obj.Prev == "" {
 		return errors.New("you have reached the first page")
 	}

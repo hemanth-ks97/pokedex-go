@@ -9,8 +9,11 @@ import (
 	"github.com/hemanth-ks97/pokedex-go/internal/pokeapi"
 )
 
-func map_cb(pokeclient *pokeapi.PokeClient) error {
-	if cur_location_obj.Next == "" {
+func map_cb(pokeclient *pokeapi.PokeClient, args []string) error {
+	if len(args) != 0 {
+		return errors.New("invalid usage - received more arguments than expected")
+	}
+	if pokeapi.Cur_location_obj.Next == "" {
 		return errors.New("you have reached the last page")
 	}
 	//check cache and return if hit
