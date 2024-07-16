@@ -10,6 +10,7 @@ import (
 type PokeClient struct {
 	Cache      pokecache.Cache
 	HTTPClient http.Client
+	MyPokedex  map[string]Pokemon
 }
 
 func NewPokeClient() PokeClient {
@@ -18,5 +19,6 @@ func NewPokeClient() PokeClient {
 	return PokeClient{
 		Cache:      pokecache.NewCache(),
 		HTTPClient: *client,
+		MyPokedex:  make(map[string]Pokemon),
 	}
 }
