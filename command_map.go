@@ -22,5 +22,10 @@ func GetCommands() map[string]Command {
 			description: "Lists the previous 20 location (if exists)",
 			callback:    mapb_cb,
 		},
+		"explore": {
+			name:        "explore <location-area>",
+			description: "Lists the pokemon available in the <location-area>",
+			callback:    explore_cb,
+		},
 	}
 }
